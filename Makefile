@@ -1,6 +1,6 @@
 
 BIN = bin/expresso
-PREFIX = /usr/local
+BINROOT = `npm config get binroot`
 JSCOV = deps/jscoverage/node-jscoverage
 
 test: $(BIN)
@@ -12,14 +12,14 @@ test-cov:
 install: install-jscov install-expresso
 
 uninstall:
-	rm -f $(PREFIX)/bin/expresso
-	rm -f $(PREFIX)/bin/node-jscoverage
+	rm -f $(BINROOT)/expresso
+	rm -f $(BINROOT)/node-jscoverage
 
 install-jscov: $(JSCOV)
-	install $(JSCOV) $(PREFIX)/bin
+	install $(JSCOV) $(BINROOT)
 
 install-expresso:
-	install $(BIN) $(PREFIX)/bin
+	install $(BIN) $(BINROOT)
 
 $(JSCOV):
 	cd deps/jscoverage && ./configure && make && mv jscoverage node-jscoverage
